@@ -20,8 +20,8 @@ export default function WeatherChart({ dados, cidade }: WeatherChartProps) {
       <h3 className="text-xl font-bold mb-4 text-gray-700"> Histórico de Temperatura - {cidade}</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={dados} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-          <CartesianGrid stroke="#e0e7ff" strokeDasharray="3 3" /> {/* Lilás pastel */}
-          <XAxis dataKey="time" tick={{ fill: '#6b7280' }} /> {/* Cinza suave */}
+          <CartesianGrid stroke="#e0e7ff" strokeDasharray="3 3" /> 
+          <XAxis dataKey="time" tick={{ fill: '#6b7280' }} /> 
           <YAxis 
             label={{ value: '°C', angle: -90, position: 'insideLeft', fill: '#6b7280' }} 
             tick={{ fill: '#6b7280' }}

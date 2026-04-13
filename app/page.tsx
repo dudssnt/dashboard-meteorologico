@@ -108,9 +108,7 @@ export default function Home() {
   return (
     <main className="container mx-auto px-4 py-8">
       <header className="text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-2">Dashboard 
-          
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-2">Dashboard Meteorológico</h1>
       </header>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
