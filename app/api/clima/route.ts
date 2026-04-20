@@ -10,21 +10,23 @@ export async function GET(request: Request) {
   }
 
   try {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relativehumidity_2m,wind_speed_10m&hourly=temperature_2m&timezone=auto&forecast_days=1`;
-    const res = await fetch(url);
+    const res = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relativehumidity_2m,wind_speed_10m&hourly=temperature_2m&timezone=auto&forecast_days=1`
+    );
+
     const data = await res.json();
 
-    const current = {
-      temp: Math.round(data.current.temperature_2m),
-      humidity: data.current.relativehumidity_2m,
-      wind: data.current.wind_speed_10m,
-    };
-    const hourly = data.hourly.time.slice(0, 12).map((time: string, idx: number) => ({
-      time: new Date(time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-      temp: Math.round(data.hourly.temperature_2m[idx]),
-    }));
-
-    return NextResponse.json({ current, hourly });
+    return NextResponse.json({
+      current: {
+        temp: Math.round(data.current.temperature_2m),
+        humidity: data.current.relativehumidity_2m,
+        wind: data.current.wind_speed_10m,
+      },
+      hourly: data.hourly.time.slice(0, 12).map((time: string, i: number) => ({
+        time: new Date(time).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        temp: Math.round(data.hourly.temperature_2m[i]),
+      })),
+    });
   } catch {
     return NextResponse.json({ error: 'Falha ao buscar dados' }, { status: 500 });
   }
